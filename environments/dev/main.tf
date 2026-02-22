@@ -14,10 +14,8 @@ module "nat" {
   network_id = module.network.vpc_id
 }
 
-module "service_accounts" {
-  source     = "../../modules/service_accounts"
-  project_id = var.project_id
-}
+# Removed service_accounts module - the service account for Terraform 
+# is already created and configured in GCP for GitHub Actions
 
 module "cloudsql" {
   source     = "../../modules/cloudsql"
