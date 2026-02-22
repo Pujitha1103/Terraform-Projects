@@ -1,6 +1,6 @@
 module "network" {
-  source  = "../../modules/network"
-  region  = var.region
+  source = "../../modules/network"
+  region = var.region
 }
 
 module "firewall" {
