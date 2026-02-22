@@ -15,15 +15,16 @@ module "nat" {
 }
 
 module "service_accounts" {
-  source = "../../modules/service_accounts"
+  source     = "../../modules/service_accounts"
+  project_id = var.project_id
 }
 
 module "cloudsql" {
   source     = "../../modules/cloudsql"
   region     = var.region
   network_id = module.network.vpc_id
-  db_user    = "devuser" # Or reference from secret if needed
-  db_pass    = null # Will be generated in module
+  db-user-v2    = var.db-user-v2 # Or reference from secret if needed
+  db-pass-v2    = var.db-pass-v2 # Will be generated in module
 }
 
 module "mig" {

@@ -1,11 +1,9 @@
 name: Terraform GCP 3-Tier
 
-# Required for google-github-actions/auth OIDC authentication
 permissions:
   id-token: write
   contents: read
 
-# Event triggers for workflow
 on:
   push:
     branches:
@@ -39,7 +37,6 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
@@ -52,13 +49,17 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
+      # ------------------------------
+      # PLAN (Pull Requests Only)
+      # ------------------------------
+      - name: Terraform Plan (PR Only)
+        if: github.event_name == 'pull_request'
+        run: terraform plan
 
-      - name: Terraform Destroy (Clean Slate)
-        if: github.ref == 'refs/heads/main'
-        run: terraform destroy -auto-approve
-
+      # ------------------------------
+      # APPLY (Main Branch Only)
+      # Fresh plan generated here
+      # ------------------------------
       - name: Terraform Apply (Main Only)
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve
