@@ -1,1 +1,5 @@
-# Add variables as needed for service accounts module.
+
+variable "project_id" {
+	description = "The GCP project ID to assign roles in."
+	type        = string
+}

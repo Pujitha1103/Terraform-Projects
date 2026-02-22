@@ -33,5 +33,10 @@ module "loadbalancer" {
 }
 
 module "service_accounts" {
-  source = "../../modules/service_accounts"
+  source     = "../../modules/service_accounts"
+  project_id = var.project_id
+}
+
+output "terraform_service_account_email" {
+  value = module.service_accounts.terraform_service_account_email
 }
