@@ -41,6 +41,10 @@ jobs:
 
 
       - name: Set up Cloud SDK
+      - name: Terraform Destroy (Clean Slate)
+        if: github.ref == 'refs/heads/main'
+        run: terraform destroy -auto-approve
+
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Terraform Init
