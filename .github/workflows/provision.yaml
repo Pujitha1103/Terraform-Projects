@@ -54,12 +54,16 @@ jobs:
       # ------------------------------
       - name: Terraform Plan (PR Only)
         if: github.event_name == 'pull_request'
-        run: terraform plan
+        run: terraform plan -out=tfplan
 
       # ------------------------------
       # APPLY (Main Branch Only)
-      # Fresh plan generated here
+      # Plan saved to file ensures exact execution
       # ------------------------------
+      - name: Terraform Plan (Main Only)
+        if: github.ref == 'refs/heads/main'
+        run: terraform plan -out=tfplan
+
       - name: Terraform Apply (Main Only)
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve
+        run: terraform apply tfplan

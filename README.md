@@ -247,13 +247,19 @@ Security:
 
     terraform validate
 
-## Plan Changes
+## Plan Changes (Save to File)
 
-    terraform plan
+    terraform plan -out=tfplan
+
+## Review Plan
+
+Review the plan output to ensure all changes are expected.
 
 ## Apply Infrastructure
 
-    terraform apply
+    terraform apply tfplan
+
+This ensures Terraform applies exactly what was planned, with no surprises.
 
 ------------------------------------------------------------------------
 
