@@ -14,6 +14,10 @@ module "nat" {
   network_id = module.network.vpc_id
 }
 
+module "service_accounts" {
+  source = "../../modules/service_accounts"
+}
+
 module "cloudsql" {
   source     = "../../modules/cloudsql"
   region     = var.region
@@ -30,8 +34,4 @@ module "mig" {
 
 module "loadbalancer" {
   source = "../../modules/loadbalancer"
-}
-
-module "service_accounts" {
-  source = "../../modules/service_accounts"
 }
