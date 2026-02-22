@@ -20,7 +20,9 @@ resource "random_password" "db_pass" {
 
 resource "google_secret_manager_secret" "db_user" {
   secret_id = "db-user"
-  replication {}
+  replication {
+    auto {}
+  }
 }
 
 resource "google_secret_manager_secret_version" "db_user_version" {
@@ -30,7 +32,9 @@ resource "google_secret_manager_secret_version" "db_user_version" {
 
 resource "google_secret_manager_secret" "db_pass" {
   secret_id = "db-pass"
-  replication {}
+  replication {
+    auto {}
+  }
 }
 
 resource "google_secret_manager_secret_version" "db_pass_version" {
