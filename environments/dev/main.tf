@@ -1,6 +1,6 @@
 module "network" {
-  source  = "../../modules/network"
-  region  = var.region
+  source = "../../modules/network"
+  region = var.region
 }
 
 module "firewall" {
@@ -23,8 +23,8 @@ module "cloudsql" {
   source     = "../../modules/cloudsql"
   region     = var.region
   network_id = module.network.vpc_id
-  db-user-v2    = var.db-user-v2 # Or reference from secret if needed
-  db-pass-v2    = var.db-pass-v2 # Will be generated in module
+  db-user-v2 = var.db-user-v2 # Or reference from secret if needed
+  db-pass-v2 = var.db-pass-v2 # Will be generated in module
 }
 
 module "mig" {
